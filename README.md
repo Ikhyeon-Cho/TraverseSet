@@ -1,20 +1,23 @@
-<div align="center">
-<div>
+<h1 align="center">TraverseSet</h1>
 
-# Urban Traversability Dataset
+<p align="center">
+  <a href="https://github.com/Ikhyeon-Cho/LeSTA"><img src="https://img.shields.io/badge/C%2B%2B-17-blue.svg" alt="C++: 17"></a>
+  <a href="#dependencies"><img src="https://img.shields.io/badge/ROS%201-Noetic-2ea44f.svg" alt="ROS 1: Noetic"></a>
+  <a href="#get-the-data"><img src="https://img.shields.io/badge/Download-rosbag-f59e0b.svg" alt="Download: rosbag"></a>
+  <a href="https://doi.org/10.1109/LRA.2024.3376148"><img src="https://img.shields.io/badge/DOI-10.1109%2FLRA.2024.3376148-00629b.svg" alt="DOI: 10.1109/LRA.2024.3376148"></a>
+</p>
 
-<br>
+A LiDAR-inertial dataset for self-supervised traversability learning in urban and rural environments, presented in **[LeSTA](https://doi.org/10.1109/LRA.2024.3376148): Learning Self-Supervised Traversability With Navigation Experiences of Mobile Robots: A Risk-Aware Self-Training Approach**.
 
-[🛠️ Download](#get-the-data) | [🎥 Video]() | [📖 Paper (RA-L)](https://ieeexplore.ieee.org/document/10468651) | [💻 How-to-train-model](https://github.com/Ikhyeon-Cho/LeSTA)
-
-<br>
-
-<div align="left">
-<div>
-
-The dataset corresponding to the paper *['Learning Self-supervised Traversability with Navigation Experiences of Mobile Robots: A Risk-aware Self-training Approach'](https://ieeexplore.ieee.org/document/10468651)* , accepted for publication in RA-L on Feb, 2024. 
-<p align='center'>
-    <img src="docs/Learned LiDAR Traversability.gif" alt="demo" width="800"/>
+<p align="center">
+  <img src="docs/environments.jpeg" alt="Robot trajectories in the urban campus (left) and rural farm road (right)" width="100%">
+</p>
+<p align="center">
+  <img src="docs/parking_lot.gif" alt="LiDAR visualization in the urban campus" width="49%">
+  <img src="docs/farm_road.gif" alt="LiDAR visualization on the rural farm road" width="49%">
+</p>
+<p align="center">
+  <em>Urban campus (left) and rural farm road (right): collection environments, robot trajectories, and LiDAR visualizations.</em>
 </p>
 
 Our task of interests are: **terrain mapping**; **ground obstacle detection**; and the estimation of ***'robot-specific'* traversability**.
@@ -47,16 +50,17 @@ Therefore, we've made an automated data collection pipeline, which labels the tr
 > **[Note]:** To reduce the size of datasets, only the *packet messages* of LiDAR sensor were recorded. This means that we have to unpack the lidar packets for playback the recorded point cloud measurements. For the purpose, there is a `vlp16packet_to_pointcloud.launch` file that handles the conversion of lidar packet to point clouds.
 - **Robotic Platform:** Two-wheeled differential-drive robot, [ISR-M3](https://github.com/Ikhyeon-Cho/isr_robot_ros/tree/isr_m4/ros1), was used to collect the datasets. The robot was equipped with a single 3D LiDAR and IMU. During the experiments, 3D pose of the robot was estimated by the use of a Lidar-inertial odometry (LIO) system.
 
-- **Environments:** We mainly provide two datasets with distinct ground surface characteristics. The training (blue) / testing (red) trajectories of a robot are shown in the aerial images below.   
+- **Environments:** We mainly provide two datasets with distinct ground surface characteristics. The training (blue) / testing (red) trajectories of a robot are shown in the overview above.
   - **Urban campus**: This main target environment spans approximately 510m x 460m, with a maximum elevation change of 17m. The maximum inclination of the terrain is 14 degrees. The environment mostly consists of asphalt terrain. Some damaged roads, cobblestoned pavements, and the roads with small debris are challenging.
   - **Rural farm road**: We additionally validated our approach in the unstructured environments. Farm road areas were typically unpaved dirt or gravel and included various low-height ground obstacles. 
 
-<p align='center'>
-    <img src="docs/environments.jpeg" alt="demo" width="800"/>
+### Example: Traversability Learning with LeSTA
+
+<p align="center">
+  <img src="docs/Learned LiDAR Traversability.gif" alt="Example of robot-specific traversability prediction with LeSTA" width="800">
 </p>
-<p align='center'>
-    <img src="docs/parking_lot.gif" alt="demo" width="400"/>
-    <img src="docs/farm_road.gif" alt="demo" width="400"/>
+<p align="center">
+  <em>Example of robot-specific traversability prediction with LeSTA.</em>
 </p>
 
 
@@ -108,7 +112,7 @@ sudo apt install python3-catkin-tools
 Use the following commands to download and build the `terrain_dataset_player` package:
   ```
   cd ~/your-ros-workspace/src
-  git clone https://github.com/Ikhyeon-Cho/urban-terrain-dataset.git
+  git clone https://github.com/Ikhyeon-Cho/TraverseSet.git
   cd ..
   catkin build terrain_dataset_player   ## If not using catkin_tools, use catkin_make
   ```
